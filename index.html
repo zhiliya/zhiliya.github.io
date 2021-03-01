@@ -178,7 +178,437 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>自动补全代码（双击tab）</p>
+<p>ctor： 自动补全构造函数</p>
+<p>prop： 自动补全成员属性</p>
+<p>cw： 自动补全Control.WriteLIne()<br>快捷键</p>
+<p>Ctrl + K + S ： 代码块添加标签快捷键</p>
+<p>Ctrl + M + O: 折叠所有方法<br>Ctrl + M + L:  展开所有方法</p>
+<p>Ctrl + M + M: 折叠或者展开当前方法</p>
+<p>Alt + ↑  （Alt +↓） ： 代码上下移动</p>
+<p>Ctrl+K+D： 快速对齐代码</p>
+<p>Ctrl+Z： 撤销</p>
+<p>Ctrl+Y： 取消撤销</p>
+<p>Ctrl+J、Shift+Alt+F10：快速弹出智能提示</p>
+<p>Ctrl+K+C、Ctrl+K+U： 注释、取消注释</p>
+<p>Ctrl+C 、Ctrl+V  ：  复制当前行</p>
+<p>Ctrl+V ： 剪切当前行</p>
+<p>Ctrl+L ： 删除当前行</p>
+<p>Ctrl+U：转小写</p>
+<p>Ctrl+Shift+U：转大写</p>
+<p>Ctrl+F ： 查找</p>
+<p>Ctrl+H ： 替换</p>
+<p>工具箱的的不见的问题：    Ctrl+Alt+X</p>
+<p>————————————————<br>版权声明：本文为CSDN博主「qingkaqingka」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/qingkaqingka/article/details/85094413" target="_blank" rel="noopener">https://blog.csdn.net/qingkaqingka/article/details/85094413</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Console.WriteLine(&quot;Size of int: &#123;0&#125;&quot;, sizeof(int));</span><br></pre></td></tr></table></figure>
+
+<h1 id="C-数据类型"><a href="#C-数据类型" class="headerlink" title="C# 数据类型"></a>C# 数据类型</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">字符串（String）类型的值可以通过两种形式进行分配：引号和 @引号。</span><br><span class="line"></span><br><span class="line">例如：</span><br><span class="line"></span><br><span class="line">String str &#x3D; &quot;runoob.com&quot;;</span><br><span class="line"></span><br><span class="line">一个 @引号字符串：</span><br><span class="line"></span><br><span class="line">@&quot;runoob.com&quot;;</span><br><span class="line"></span><br><span class="line">C# string 字符串的前面可以加 @（称作&quot;逐字字符串&quot;）将转义字符（\）当作普通字符对待，比如：</span><br><span class="line"></span><br><span class="line">string str &#x3D; @&quot;C:\Windows&quot;;</span><br><span class="line"></span><br><span class="line">等价于：</span><br><span class="line"></span><br><span class="line">string str &#x3D; &quot;C:\\Windows&quot;;</span><br><span class="line"></span><br><span class="line">@ 字符串中可以任意换行，换行符及缩进空格都计算在字符串长度之内。</span><br><span class="line"></span><br><span class="line">string str &#x3D; @&quot;&lt;script type&#x3D;&quot;&quot;text&#x2F;javascript&quot;&quot;&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">    --&gt;</span><br><span class="line">&lt;&#x2F;script&gt;&quot;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="接受来自用户的值"><a href="#接受来自用户的值" class="headerlink" title="接受来自用户的值"></a>接受来自用户的值</h2><p><strong>System</strong> 命名空间中的 <strong>Console</strong> 类提供了一个函数 <strong>ReadLine()</strong>，用于接收来自用户的输入，并把它存储到一个变量中。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int num;</span><br><span class="line">num &#x3D; Convert.ToInt32(Console.ReadLine());</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符常量"><a href="#字符常量" class="headerlink" title="字符常量"></a>字符常量</h2><p>字符常量是括在单引号里，例如，’x’，且可存储在一个简单的字符类型变量中。一个字符常量可以是一个普通字符（例如 ‘x’）、一个转义序列（例如 ‘\t’）或者一个通用字符（例如 ‘\u02C0’）。</p>
+<p>在 C# 中有一些特定的字符，当它们的前面带有反斜杠时有特殊的意义，可用于表示换行符（\n）或制表符 tab（\t）。在这里，列出一些转义序列码：</p>
+<table>
+<thead>
+<tr>
+<th>转义序列</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\</td>
+<td>\ 字符</td>
+</tr>
+<tr>
+<td>&#39;</td>
+<td>‘ 字符</td>
+</tr>
+<tr>
+<td>&quot;</td>
+<td>“ 字符</td>
+</tr>
+<tr>
+<td>?</td>
+<td>? 字符</td>
+</tr>
+<tr>
+<td>\a</td>
+<td>Alert 或 bell</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>退格键（Backspace）</td>
+</tr>
+<tr>
+<td>\f</td>
+<td>换页符（Form feed）</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>换行符（Newline）</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>回车</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>水平制表符 tab</td>
+</tr>
+<tr>
+<td>\v</td>
+<td>垂直制表符 tab</td>
+</tr>
+<tr>
+<td>\ooo</td>
+<td>一到三位的八进制数</td>
+</tr>
+<tr>
+<td>\xhh . . .</td>
+<td>一个或多个数字的十六进制数</td>
+</tr>
+</tbody></table>
+<h2 id="其他运算符"><a href="#其他运算符" class="headerlink" title="其他运算符"></a>其他运算符</h2><p>下表列出了 C# 支持的其他一些重要的运算符，包括 <strong>sizeof</strong>、<strong>typeof</strong> 和 <strong>? :</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sizeof()</td>
+<td>返回数据类型的大小。</td>
+<td>sizeof(int)，将返回 4.</td>
+</tr>
+<tr>
+<td>typeof()</td>
+<td>返回 class 的类型。</td>
+<td>typeof(StreamReader);</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>返回变量的地址。</td>
+<td>&a; 将得到变量的实际地址。</td>
+</tr>
+<tr>
+<td>*</td>
+<td>变量的指针。</td>
+<td>*a; 将指向一个变量。</td>
+</tr>
+<tr>
+<td>? :</td>
+<td>条件表达式</td>
+<td>如果条件为真 ? 则为 X : 否则为 Y</td>
+</tr>
+<tr>
+<td>is</td>
+<td>判断对象是否为某一类型。</td>
+<td>If( Ford is Car)  // 检查 Ford 是否是 Car 类的一个对象。</td>
+</tr>
+<tr>
+<td>as</td>
+<td>强制转换，即使转换失败也不会抛出异常。</td>
+<td>Object obj = new StringReader(“Hello”);      StringReader r = obj as StringReader;</td>
+</tr>
+</tbody></table>
+<h2 id="C-单问号-与-双问号"><a href="#C-单问号-与-双问号" class="headerlink" title="C# 单问号 ? 与 双问号 ??"></a>C# 单问号 ? 与 双问号 ??</h2><p>? : 单问号用于对 int,double,bool 等无法直接赋值为 null 的数据类型进行 null 的赋值，意思是这个数据类型是 Nullable 类型的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int? i &#x3D; 3;</span><br></pre></td></tr></table></figure>
+
+<p>等同于：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Nullable&lt;int&gt; i &#x3D; new Nullable&lt;int&gt;(3);</span><br><span class="line">int i; &#x2F;&#x2F;默认值0</span><br><span class="line">int? ii; &#x2F;&#x2F;默认值null</span><br></pre></td></tr></table></figure>
+
+<p>?? : 双问号 可用于判断一个变量在为 null 时返回一个指定的值。</p>
+<h2 id="初始化数组"><a href="#初始化数组" class="headerlink" title="初始化数组"></a>初始化数组</h2><p>声明一个数组不会在内存中初始化数组。当初始化数组变量时，您可以赋值给数组。</p>
+<p>数组是一个引用类型，所以您需要使用 <strong>new</strong> 关键字来创建数组的实例。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double[] balance &#x3D; new double[10];</span><br></pre></td></tr></table></figure>
+
+<h2 id="赋值给数组"><a href="#赋值给数组" class="headerlink" title="赋值给数组"></a>赋值给数组</h2><p>您可以通过使用索引号赋值给一个单独的数组元素，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">double[] balance &#x3D; new double[10];</span><br><span class="line">balance[0] &#x3D; 4500.0;</span><br></pre></td></tr></table></figure>
+
+<p>您可以在声明数组的同时给数组赋值，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double[] balance &#x3D; &#123; 2340.0, 4523.69, 3421.0&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>您也可以创建并初始化一个数组，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int [] marks &#x3D; new int[5]  &#123; 99,  98, 92, 97, 95&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在上述情况下，你也可以省略数组的大小，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int [] marks &#x3D; new int[]  &#123; 99,  98, 92, 97, 95&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>您也可以赋值一个数组变量到另一个目标数组变量中。在这种情况下，目标和源会指向相同的内存位置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int [] marks &#x3D; new int[]  &#123; 99,  98, 92, 97, 95&#125;;</span><br><span class="line">int[] score &#x3D; marks;</span><br></pre></td></tr></table></figure>
+
+<p>当您创建一个数组时，C# 编译器会根据数组类型隐式初始化每个数组元素为一个默认值。例如，int 数组的所有元素都会被初始化为 0。</p>
+<p>C# 教程      </p>
+<p><a href="https://www.runoob.com/csharp/csharp-tutorial.html" target="_blank" rel="noopener">             C# 教程            </a><a href="https://www.runoob.com/csharp/csharp-intro.html" target="_blank" rel="noopener">             C# 简介            </a><a href="https://www.runoob.com/csharp/csharp-environment-setup.html" target="_blank" rel="noopener">             C# 环境            </a><a href="https://www.runoob.com/csharp/csharp-program-structure.html" target="_blank" rel="noopener">             C# 程序结构            </a><a href="https://www.runoob.com/csharp/csharp-basic-syntax.html" target="_blank" rel="noopener">             C# 基本语法            </a><a href="https://www.runoob.com/csharp/csharp-data-types.html" target="_blank" rel="noopener">             C# 数据类型            </a><a href="https://www.runoob.com/csharp/csharp-type-conversion.html" target="_blank" rel="noopener">             C# 类型转换            </a><a href="https://www.runoob.com/csharp/csharp-variables.html" target="_blank" rel="noopener">             C# 变量            </a><a href="https://www.runoob.com/csharp/csharp-constants.html" target="_blank" rel="noopener">             C# 常量            </a><a href="https://www.runoob.com/csharp/csharp-operators.html" target="_blank" rel="noopener">             C# 运算符            </a><a href="https://www.runoob.com/csharp/csharp-decision.html" target="_blank" rel="noopener">             C# 判断            </a><a href="https://www.runoob.com/csharp/csharp-loops.html" target="_blank" rel="noopener">             C# 循环            </a><a href="https://www.runoob.com/csharp/csharp-encapsulation.html" target="_blank" rel="noopener">             C# 封装            </a><a href="https://www.runoob.com/csharp/csharp-methods.html" target="_blank" rel="noopener">             C# 方法            </a><a href="https://www.runoob.com/csharp/csharp-nullable.html" target="_blank" rel="noopener">             C# 可空类型            </a><a href="https://www.runoob.com/csharp/csharp-array.html" target="_blank" rel="noopener">             C# 数组（Array）            </a><a href="https://www.runoob.com/csharp/csharp-string.html" target="_blank" rel="noopener">             C# 字符串（String）            </a><a href="https://www.runoob.com/csharp/csharp-struct.html" target="_blank" rel="noopener">             C# 结构体（Struct）            </a><a href="https://www.runoob.com/csharp/csharp-enum.html" target="_blank" rel="noopener">             C# 枚举（Enum）            </a><a href="https://www.runoob.com/csharp/csharp-class.html" target="_blank" rel="noopener">             C# 类（Class）            </a><a href="https://www.runoob.com/csharp/csharp-inheritance.html" target="_blank" rel="noopener">             C# 继承            </a><a href="https://www.runoob.com/csharp/csharp-polymorphism.html" target="_blank" rel="noopener">             C# 多态性            </a><a href="https://www.runoob.com/csharp/csharp-operator-overloading.html" target="_blank" rel="noopener">             C# 运算符重载            </a><a href="https://www.runoob.com/csharp/csharp-interface.html" target="_blank" rel="noopener">             C# 接口（Interface）            </a><a href="https://www.runoob.com/csharp/csharp-namespace.html" target="_blank" rel="noopener">             C# 命名空间（Namespace）            </a><a href="https://www.runoob.com/csharp/csharp-preprocessor-directives.html" target="_blank" rel="noopener">             C# 预处理器指令            </a><a href="https://www.runoob.com/csharp/csharp-regular-expressions.html" target="_blank" rel="noopener">             C# 正则表达式            </a><a href="https://www.runoob.com/csharp/csharp-exception-handling.html" target="_blank" rel="noopener">             C# 异常处理            </a><a href="https://www.runoob.com/csharp/csharp-file-io.html" target="_blank" rel="noopener">             C# 文件的输入与输出            </a></p>
+<h2 id="C-高级教程"><a href="#C-高级教程" class="headerlink" title="C# 高级教程"></a>C# 高级教程</h2><p><a href="https://www.runoob.com/csharp/csharp-attribute.html" target="_blank" rel="noopener">             C# 特性（Attribute）            </a><a href="https://www.runoob.com/csharp/csharp-reflection.html" target="_blank" rel="noopener">             C# 反射（Reflection）            </a><a href="https://www.runoob.com/csharp/csharp-property.html" target="_blank" rel="noopener">             C# 属性（Property）            </a><a href="https://www.runoob.com/csharp/csharp-indexer.html" target="_blank" rel="noopener">             C# 索引器（Indexer）            </a><a href="https://www.runoob.com/csharp/csharp-delegate.html" target="_blank" rel="noopener">             C# 委托（Delegate）            </a><a href="https://www.runoob.com/csharp/csharp-event.html" target="_blank" rel="noopener">             C# 事件（Event）            </a><a href="https://www.runoob.com/csharp/csharp-collection.html" target="_blank" rel="noopener">             C# 集合（Collection）            </a><a href="https://www.runoob.com/csharp/csharp-generic.html" target="_blank" rel="noopener">             C# 泛型（Generic）            </a><a href="https://www.runoob.com/csharp/csharp-anonymous-methods.html" target="_blank" rel="noopener">             C# 匿名方法            </a><a href="https://www.runoob.com/csharp/csharp-unsafe-codes.html" target="_blank" rel="noopener">             C# 不安全代码            </a><a href="https://www.runoob.com/csharp/csharp-multithreading.html" target="_blank" rel="noopener">             C# 多线程            </a></p>
+<p> <a href="https://www.runoob.com/csharp/csharp-nullable.html" target="_blank" rel="noopener">C# 可空类型</a> </p>
+<p><a href="https://www.runoob.com/csharp/csharp-string.html" target="_blank" rel="noopener">C# 字符串（String）</a> </p>
+<h1 id="C-数组（Array）"><a href="#C-数组（Array）" class="headerlink" title="C# 数组（Array）"></a>C# 数组（Array）</h1><p>数组是一个存储相同类型元素的固定大小的顺序集合。数组是用来存储数据的集合，通常认为数组是一个同一类型变量的集合。</p>
+<p>声明数组变量并不是声明 number0、number1、…、number99 一个个单独的变量，而是声明一个就像 numbers  这样的变量，然后使用 numbers[0]、numbers[1]、…、numbers[99]  来表示一个个单独的变量。数组中某个指定的元素是通过索引来访问的。</p>
+<p>所有的数组都是由连续的内存位置组成的。最低的地址对应第一个元素，最高的地址对应最后一个元素。</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2014/04/arrays.jpg" alt="C# 中的数组"></p>
+<h2 id="声明数组"><a href="#声明数组" class="headerlink" title="声明数组"></a>声明数组</h2><p>在 C# 中声明一个数组，您可以使用下面的语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datatype[] arrayName;</span><br></pre></td></tr></table></figure>
+
+<p>其中，</p>
+<ul>
+<li><em>datatype</em> 用于指定被存储在数组中的元素的类型。</li>
+<li><em>[ ]</em> 指定数组的秩（维度）。秩指定数组的大小。</li>
+<li><em>arrayName</em> 指定数组的名称。</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double[] balance;</span><br></pre></td></tr></table></figure>
+
+<h2 id="初始化数组-1"><a href="#初始化数组-1" class="headerlink" title="初始化数组"></a>初始化数组</h2><p>声明一个数组不会在内存中初始化数组。当初始化数组变量时，您可以赋值给数组。</p>
+<p>数组是一个引用类型，所以您需要使用 <strong>new</strong> 关键字来创建数组的实例。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double[] balance &#x3D; new double[10];</span><br></pre></td></tr></table></figure>
+
+<h2 id="赋值给数组-1"><a href="#赋值给数组-1" class="headerlink" title="赋值给数组"></a>赋值给数组</h2><p>您可以通过使用索引号赋值给一个单独的数组元素，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">double[] balance &#x3D; new double[10];</span><br><span class="line">balance[0] &#x3D; 4500.0;</span><br></pre></td></tr></table></figure>
+
+<p>您可以在声明数组的同时给数组赋值，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double[] balance &#x3D; &#123; 2340.0, 4523.69, 3421.0&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>您也可以创建并初始化一个数组，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int [] marks &#x3D; new int[5]  &#123; 99,  98, 92, 97, 95&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在上述情况下，你也可以省略数组的大小，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int [] marks &#x3D; new int[]  &#123; 99,  98, 92, 97, 95&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>您也可以赋值一个数组变量到另一个目标数组变量中。在这种情况下，目标和源会指向相同的内存位置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int [] marks &#x3D; new int[]  &#123; 99,  98, 92, 97, 95&#125;;</span><br><span class="line">int[] score &#x3D; marks;</span><br></pre></td></tr></table></figure>
+
+<p>当您创建一个数组时，C# 编译器会根据数组类型隐式初始化每个数组元素为一个默认值。例如，int 数组的所有元素都会被初始化为 0。</p>
+<h2 id="访问数组元素"><a href="#访问数组元素" class="headerlink" title="访问数组元素"></a>访问数组元素</h2><p>元素是通过带索引的数组名称来访问的。这是通过把元素的索引放置在数组名称后的方括号中来实现的。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double salary &#x3D; balance[9];</span><br></pre></td></tr></table></figure>
+
+<p>下面是一个实例，使用上面提到的三个概念，即声明、赋值、访问数组：</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p><strong>using</strong> System;<br> <strong>namespace</strong> ArrayApplication<br> {<br>   <strong>class</strong> MyArray<br>   {<br>    <strong>static</strong> <strong>void</strong> Main(<strong>string</strong>[] args)<br>    {<br>      <strong>int</strong> []  n = new <strong>int</strong>[10]; <em>/\</em> n 是一个带有 10 个整数的数组 */*<br>      <strong>int</strong> i,j;</p>
+<pre><code>  */\* 初始化数组 n 中的元素 \*/*     
+  **for** ( i = 0; i &lt; 10; i++ )
+  {
+   n[ i ] = i + 100;
+  }
+
+  */\* 输出每个数组元素的值 \*/*
+  **for** (j = 0; j &lt; 10; j++ )
+  {
+   Console.WriteLine(&quot;Element[{0}] = {1}&quot;, j, n[j]);
+  }
+  Console.ReadKey();
+}</code></pre><p>   }<br> }</p>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Element[0] &#x3D; 100</span><br><span class="line">Element[1] &#x3D; 101</span><br><span class="line">Element[2] &#x3D; 102</span><br><span class="line">Element[3] &#x3D; 103</span><br><span class="line">Element[4] &#x3D; 104</span><br><span class="line">Element[5] &#x3D; 105</span><br><span class="line">Element[6] &#x3D; 106</span><br><span class="line">Element[7] &#x3D; 107</span><br><span class="line">Element[8] &#x3D; 108</span><br><span class="line">Element[9] &#x3D; 109</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-foreach-循环"><a href="#使用-foreach-循环" class="headerlink" title="使用 foreach 循环"></a>使用 <em>foreach</em> 循环</h2><p>在前面的实例中，我们使用一个 for 循环来访问每个数组元素。您也可以使用一个  <strong>foreach</strong> 语句来遍历数组。</p>
+<h2 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h2><p><strong>using</strong> System;</p>
+<p> <strong>namespace</strong> ArrayApplication<br> {<br>   <strong>class</strong> MyArray<br>   {<br>    <strong>static</strong> <strong>void</strong> Main(<strong>string</strong>[] args)<br>    {<br>      <strong>int</strong> []  n = new <strong>int</strong>[10]; <em>/\</em> n 是一个带有 10 个整数的数组 */*</p>
+<p>​      <em>/\</em> 初始化数组 n 中的元素 */*<br>​      <strong>for</strong> ( <strong>int</strong> i = 0; i &lt; 10; i++ )<br>​      {<br>​       n[i] = i + 100;<br>​      }</p>
+<p>​      <em>/\</em> 输出每个数组元素的值 */*<br>​      <strong>foreach</strong> (<strong>int</strong> j <strong>in</strong> n )<br>​      {<br>​       <strong>int</strong> i = j-100;<br>​       Console.WriteLine(“Element[{0}] = {1}”, i, j);<br>​      }<br>​      Console.ReadKey();<br>​    }<br>   }<br> }</p>
+<h2 id="创建-String-对象"><a href="#创建-String-对象" class="headerlink" title="创建 String 对象"></a>创建 String 对象</h2><p>您可以使用以下方法之一来创建 string 对象：</p>
+<ul>
+<li>通过给 String 变量指定一个字符串</li>
+<li>通过使用 String 类构造函数</li>
+<li>通过使用字符串串联运算符（ + ）</li>
+<li>通过检索属性或调用一个返回字符串的方法</li>
+<li>通过格式化方法来转换一个值或对象为它的字符串表示形式</li>
+</ul>
+<p>下面的实例演示了这点：</p>
+<h2 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h2><p><strong>using</strong> System;</p>
+<p> <strong>namespace</strong> StringApplication<br> {<br>   <strong>class</strong> Program<br>   {<br>     <strong>static</strong> <strong>void</strong> Main(<strong>string</strong>[] args)<br>     {<br>       <em>//字符串，字符串连接</em><br>       <strong>string</strong> fname, lname;<br>       fname = “Rowan”;<br>       lname = “Atkinson”;</p>
+<p>​       <strong>string</strong> fullname = fname + lname;<br>​       Console.WriteLine(“Full Name: {0}”, fullname);</p>
+<p>​       <em>//通过使用 string 构造函数</em><br>​       <strong>char</strong>[] letters = { ‘H’, ‘e’, ‘l’, ‘l’,’o’ };<br>​       <strong>string</strong> greetings = new <strong>string</strong>(letters);<br>​       Console.WriteLine(“Greetings: {0}”, greetings);</p>
+<p>​       <em>//方法返回字符串</em><br>​       <strong>string</strong>[] sarray = { “Hello”, “From”, “Tutorials”, “Point” };<br>​       <strong>string</strong> message = <strong>String</strong>.<strong>Join</strong>(“ “, sarray);<br>​       Console.WriteLine(“Message: {0}”, message);</p>
+<p>​       <em>//用于转化值的格式化方法</em><br>​       DateTime waiting = new DateTime(2012, 10, 10, 17, 58, 1);<br>​       <strong>string</strong> chat = <strong>String</strong>.Format(“Message sent at {0:t} on {0:D}”,<br>​       waiting);<br>​       Console.WriteLine(“Message: {0}”, chat);<br>​       Console.ReadKey() ;<br>​     }<br>   }<br> }</p>
+<h2 id="String-类的属性"><a href="#String-类的属性" class="headerlink" title="String 类的属性"></a>String 类的属性</h2><p>String 类有以下两个属性：</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>属性名称 &amp; 描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><strong>Chars</strong> 在当前 <em>String</em> 对象中获取 <em>Char</em> 对象的指定位置。</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Length</strong> 在当前的 <em>String</em> 对象中获取字符数。</td>
+</tr>
+</tbody></table>
+<h2 id="String-类的方法"><a href="#String-类的方法" class="headerlink" title="String 类的方法"></a>String 类的方法</h2><p>String 类有许多方法用于 string 对象的操作。下面的表格提供了一些最常用的方法：</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>方法名称 &amp; 描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><strong>public static int Compare( string strA, string strB )</strong>  比较两个指定的 string 对象，并返回一个表示它们在排列顺序中相对位置的整数。该方法区分大小写。</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>public static int Compare( string strA, string strB, bool ignoreCase )</strong>  比较两个指定的 string 对象，并返回一个表示它们在排列顺序中相对位置的整数。但是，如果布尔参数为真时，该方法不区分大小写。</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>public static string Concat( string str0, string str1 )</strong>  连接两个 string 对象。</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>public static string Concat( string str0, string str1, string str2 )</strong>  连接三个 string 对象。</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>public static string Concat( string str0, string str1, string str2, string str3 )</strong>  连接四个 string 对象。</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>public bool Contains( string value )</strong>  返回一个表示指定 string 对象是否出现在字符串中的值。</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>public static string Copy( string str )</strong>  创建一个与指定字符串具有相同值的新的 String 对象。</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>public void CopyTo( int sourceIndex, char[] destination, int destinationIndex, int count )</strong>  从 string 对象的指定位置开始复制指定数量的字符到 Unicode 字符数组中的指定位置。</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>public bool EndsWith( string value )</strong>  判断 string 对象的结尾是否匹配指定的字符串。</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>public bool Equals( string value )</strong>  判断当前的 string 对象是否与指定的 string 对象具有相同的值。</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>public static bool Equals( string a, string b )</strong>  判断两个指定的 string 对象是否具有相同的值。</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>public static string Format( string format, Object arg0 )</strong>  把指定字符串中一个或多个格式项替换为指定对象的字符串表示形式。</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>public int IndexOf( char value )</strong>  返回指定 Unicode 字符在当前字符串中第一次出现的索引，索引从 0 开始。</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>public int IndexOf( string value )</strong>  返回指定字符串在该实例中第一次出现的索引，索引从 0 开始。</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>public int IndexOf( char value, int startIndex )</strong>  返回指定 Unicode 字符从该字符串中指定字符位置开始搜索第一次出现的索引，索引从 0 开始。</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>public int IndexOf( string value, int startIndex )</strong>  返回指定字符串从该实例中指定字符位置开始搜索第一次出现的索引，索引从 0 开始。</td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>public int IndexOfAny( char[] anyOf )</strong>  返回某一个指定的 Unicode 字符数组中任意字符在该实例中第一次出现的索引，索引从 0 开始。</td>
+</tr>
+<tr>
+<td>18</td>
+<td><strong>public int IndexOfAny( char[] anyOf, int startIndex )</strong>  返回某一个指定的 Unicode 字符数组中任意字符从该实例中指定字符位置开始搜索第一次出现的索引，索引从 0 开始。</td>
+</tr>
+<tr>
+<td>19</td>
+<td><strong>public string Insert( int startIndex, string value )</strong>  返回一个新的字符串，其中，指定的字符串被插入在当前 string 对象的指定索引位置。</td>
+</tr>
+<tr>
+<td>20</td>
+<td><strong>public static bool IsNullOrEmpty( string value )</strong>  指示指定的字符串是否为 null 或者是否为一个空的字符串。</td>
+</tr>
+<tr>
+<td>21</td>
+<td><strong>public static string Join( string separator,        string[] value )</strong>  连接一个字符串数组中的所有元素，使用指定的分隔符分隔每个元素。</td>
+</tr>
+<tr>
+<td>22</td>
+<td><strong>public static string Join( string separator, string[] value, int startIndex, int count )</strong>  连接接一个字符串数组中的指定位置开始的指定元素，使用指定的分隔符分隔每个元素。</td>
+</tr>
+<tr>
+<td>23</td>
+<td><strong>public int LastIndexOf( char value )</strong>  返回指定 Unicode 字符在当前 string 对象中最后一次出现的索引位置，索引从 0 开始。</td>
+</tr>
+<tr>
+<td>24</td>
+<td><strong>public int LastIndexOf( string value )</strong>  返回指定字符串在当前 string 对象中最后一次出现的索引位置，索引从 0 开始。</td>
+</tr>
+<tr>
+<td>25</td>
+<td><strong>public string Remove( int startIndex )</strong>  移除当前实例中的所有字符，从指定位置开始，一直到最后一个位置为止，并返回字符串。</td>
+</tr>
+<tr>
+<td>26</td>
+<td><strong>public string Remove( int startIndex, int count )</strong>  从当前字符串的指定位置开始移除指定数量的字符，并返回字符串。</td>
+</tr>
+<tr>
+<td>27</td>
+<td><strong>public string Replace( char oldChar, char newChar )</strong>  把当前 string 对象中，所有指定的 Unicode 字符替换为另一个指定的 Unicode 字符，并返回新的字符串。</td>
+</tr>
+<tr>
+<td>28</td>
+<td><strong>public string Replace( string oldValue, string newValue )</strong>  把当前 string 对象中，所有指定的字符串替换为另一个指定的字符串，并返回新的字符串。</td>
+</tr>
+<tr>
+<td>29</td>
+<td><strong>public string[] Split( params char[] separator )</strong>  返回一个字符串数组，包含当前的 string 对象中的子字符串，子字符串是使用指定的 Unicode 字符数组中的元素进行分隔的。</td>
+</tr>
+<tr>
+<td>30</td>
+<td><strong>public string[] Split( char[] separator, int count )</strong>  返回一个字符串数组，包含当前的 string 对象中的子字符串，子字符串是使用指定的 Unicode 字符数组中的元素进行分隔的。int 参数指定要返回的子字符串的最大数目。</td>
+</tr>
+<tr>
+<td>31</td>
+<td><strong>public bool StartsWith( string value )</strong>  判断字符串实例的开头是否匹配指定的字符串。</td>
+</tr>
+<tr>
+<td>32</td>
+<td><strong>public char[] ToCharArray()</strong> 返回一个带有当前 string 对象中所有字符的 Unicode 字符数组。</td>
+</tr>
+<tr>
+<td>33</td>
+<td><strong>public char[] ToCharArray( int startIndex, int length )</strong>  返回一个带有当前 string 对象中所有字符的 Unicode 字符数组，从指定的索引开始，直到指定的长度为止。</td>
+</tr>
+<tr>
+<td>34</td>
+<td><strong>public string ToLower()</strong> 把字符串转换为小写并返回。</td>
+</tr>
+<tr>
+<td>35</td>
+<td><strong>public string ToUpper()</strong> 把字符串转换为大写并返回。</td>
+</tr>
+<tr>
+<td>36</td>
+<td><strong>public string Trim()</strong> 移除当前 String 对象中的所有前导空白字符和后置空白字符。</td>
+</tr>
+</tbody></table>
+<p><strong>获取子字符串：</strong></p>
+<p> <strong>string</strong> substr = str.Substring(23);</p>
+<p><strong>class</strong> Program<br> {<br>   <strong>static</strong> <strong>void</strong> Main(<strong>string</strong>[] args)<br>   {<br>     <em>// 创建一个 List<Shape> 对象，并向该对象添加 Circle、Triangle 和 Rectangle</Shape></em><br>     <strong>var</strong> shapes = new List<Shape><br>     {<br>       new Rectangle(),<br>       new Triangle(),<br>       new Circle()<br>     };</Shape></p>
+<pre><code>*// 使用 foreach 循环对该列表的派生类进行循环访问，并对其中的每个 Shape 对象调用 Draw 方法* 
+**foreach** (**var** shape **in** shapes)
+{
+  shape.Draw();
+}
+
+Console.WriteLine(&quot;按下任意键退出。&quot;);
+Console.ReadKey();</code></pre><p>   }</p>
+<p> }</p>
+
       
 
       
@@ -1758,15 +2188,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sql注入</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PHP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件上传</a>
+                <a href="javascript:void(0)" class="js-tag color1">sql注入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1775,6 +2201,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">php伪协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件上传</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1806,11 +2236,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">密码学</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件读取</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件读取</a>
+                <a href="javascript:void(0)" class="js-tag color4">密码学</a>
               </li>
             
             <div class="clearfix"></div>
