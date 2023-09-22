@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/11/21/%E9%9A%90%E5%86%99/index.html">
 <meta property="og:site_name" content="zhiliya">
 <meta property="og:description" content="winhex去看和binwalk 文件属性里面最多是提示信息和解密秘钥所在 strings  -o  flag.xls | grep zjctfdd if&#x3D;1.jpg of&#x3D;2.rar skip&#x3D;6391983 bs&#x3D;1binwalk -ebinwalk  -D:jpeg(txt)  a.jpg -M(递归)data:image&#x2F;jpg;base64,iVBORw0KGgoAAAANSUhEUgA">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yoursite.com/2019/11/21/%E9%9A%90%E5%86%99/image-20200723133826028.png">
 <meta property="og:image" content="http://yoursite.com/2019/11/21/%E9%9A%90%E5%86%99/image-20200723104356505.png">
 <meta property="og:image" content="http://yoursite.com/2019/11/21/%E9%9A%90%E5%86%99/image-20200723084719301.png">
@@ -37,7 +37,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/11/21/%E9%9A%90%E5%86%99/image-20200723220310464.png">
 <meta property="og:image" content="http://yoursite.com/2019/11/21/%E9%9A%90%E5%86%99/image-20200724152120996.png">
 <meta property="article:published_time" content="2019-11-21T12:20:16.000Z">
-<meta property="article:modified_time" content="2020-09-24T08:19:54.102Z">
+<meta property="article:modified_time" content="2021-12-29T10:50:40.937Z">
 <meta property="article:author" content="zhiliya">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2019/11/21/%E9%9A%90%E5%86%99/image-20200723133826028.png">
@@ -210,7 +210,9 @@
 <p> <strong><em>tshark -r x.pcapng -e http.request.uri -T fields -Y ‘http.request.uri’ | grep -P ‘name=[A-F0-9]{3}’ | awk -F ‘=’ ‘{printf $2}’</em></strong> </p>
 </blockquote>
 <h4 id="zsteg-png和bmp"><a href="#zsteg-png和bmp" class="headerlink" title="zsteg  png和bmp"></a>zsteg  png和bmp</h4><p>zsteg是一个可以检测png和bmp文件中隐藏数据的工具。</p>
-<p>zsteg -a file ：运行给定文件上的所有方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">查看lsb数据</span><br><span class="line">zsteg xxx.bmp</span><br><span class="line">zsteg xxx.png</span><br><span class="line">检测zlib</span><br><span class="line">#-b的位数是从1开始的</span><br><span class="line">zsteg zlib.bmp -b 1 -o xy -v</span><br><span class="line">提取该通道图片</span><br><span class="line">zsteg -e b8,a,lsb,xy 文件.png -&gt; out.png</span><br></pre></td></tr></table></figure>
+
+<p>zsteg -a file ：运行给定文件上的所有方法    #查看各个通道的lsb</p>
 <p>zsteg -E file ：从给定的有效负载中提取数据（例如：zsteg -E b4，bgr，msb，xy name.png）</p>
 <ul>
 <li><strong>PNG &amp; BMP</strong> 中的 LSB</li>
@@ -238,7 +240,12 @@
 <p>空密码</p>
 <p>​                    【outguess】</p>
 <p>​                    【F5】</p>
-<p>​                    【stegdetect】检查隐写算法的可能性 outguess F5 jphide<br>​                    【Stegsolve】<br>​    </p>
+<p>​                    【stegdetect】检查隐写算法的可能性 outguess F5 jphide<br>​                    【Stegsolve】</p>
+<p>1.图片属性 </p>
+<p>2.strings </p>
+<p>3.010Editor分析，未发现额外的数据 </p>
+<p>4.StegSolve，未发现LSB等信息 </p>
+<p>5.StegDetect，未发现隐写方法。    </p>
 <h2 id="GIF-gif-，文件头：-3961"><a href="#GIF-gif-，文件头：-3961" class="headerlink" title="GIF (gif)，文件头： 3961"></a>GIF (gif)，文件头： 3961</h2><p>​                            GIF89a/87a<br>​        结束：0101003B</p>
 <h2 id="PNG-png-，文件头：89504E47"><a href="#PNG-png-，文件头：89504E47" class="headerlink" title="PNG (png)，文件头：89504E47"></a>PNG (png)，文件头：89504E47</h2><p>​        89504E47 0D0A1A0A0000000D 49484452 0000014B 0000012C<br>​        00 00 00 0D 说明IHDR头块长为13<br>​        49 48 44 52 IHDR 标识<br>​        00 00 01 F4 图像的宽，500像素<br>​        00 00 01 A4 图像的高，420像素<br>​        最后四位CB　D6  DF  8A为CRC校验<br>找表示宽度和高度的位置的话，可以先看看图片的属性，得到宽高值，转成16进制，搜索16进制值就找到了<br>​        注：png图片的保存恢复效果比较好，jpg貌似有点问题<br>​        png图片像    数保存是从左到右，从下往上排列的。<br>​        图像结束数据IEND(image trailer chunk)：它用来标记PNG文件或者数据流已经结束，并且必须要放在文件的尾部。</p>
 <p>​        如果我们仔细观察PNG文件，我们会发现，文 件的结尾12个字符看起来总应该是这样的：<br>​        00 00 00 00 49 45 4E 44 <strong>AE 42 60 82</strong><br>​        0000000049454E44AE426082<br>​        不难明白，由于数据块结构的定义，IEND数据块的长度总是0（00 00 00 00，除非人为加入信息），数据标识总是IEND（49 45 4E 44），因此，CRC码也总是AE 42 60 82。<br>​    16进制的78 9C开头的，百度一下分析是zlib压缩的标志<br>​    【】stegsolve  【LSB隐写】 零通道有异样 上面有一行人为加上去的东西</p>
@@ -249,6 +256,11 @@
 <p>：python lsb.py analyse big.png-stego.png</p>
 <p>参数说明：</p>
 <p>analyse：表示分析模式big.png-stego.png ：待分析的png图片 运行后会对图像进行分析，将其分割成块，标记每个块的最低有效位</p>
+<p>crc曲线</p>
+<p>下载后发现是png，打开看一下，图片模糊了。<strong>然后用hxd打开，选中开头IHDR，然后分析出crc32，发现crc32和它的crc32不同，长宽可能不正确。</strong></p>
+<p><strong>用python来计算正确的长和高，以下代码基于python3，能自动算出高的问题，或者宽的问题。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#coding:utf-8</span><br><span class="line">import struct</span><br><span class="line">import binascii</span><br><span class="line">f &#x3D;open(&#39;flag.png&#39;,&#39;rb&#39;)</span><br><span class="line">s &#x3D;f.read()</span><br><span class="line">ihdr &#x3D; s[0xc:0x10]</span><br><span class="line">high &#x3D; s[0x10:0x14]</span><br><span class="line">weight &#x3D;s[0x14:0x18]</span><br><span class="line">a &#x3D; s[0x18:0x1d]</span><br><span class="line">crctarget &#x3D; s[0x1d:0x21]</span><br><span class="line">flag &#x3D; True</span><br><span class="line">#爆破高，通过比较crc来计算高</span><br><span class="line">for i in range(1,2048):</span><br><span class="line">    data &#x3D; ihdr+struct.pack(&#39;&gt;i&#39;,i)+weight+a</span><br><span class="line">    crc &#x3D; binascii.crc32(data)&amp;0xffffffff</span><br><span class="line">    crc &#x3D;hex(crc)</span><br><span class="line">    if crc[2:] &#x3D;&#x3D; crctarget.hex():</span><br><span class="line">        print(&quot;High wrong&quot;)</span><br><span class="line">        print(struct.pack(&#39;&gt;i&#39;,i).hex())</span><br><span class="line">        flag &#x3D; False</span><br><span class="line">        break</span><br><span class="line">#爆破宽度，通过比较crc来计算宽</span><br><span class="line">if flag :</span><br><span class="line">    for i in range(1, 2048):</span><br><span class="line">        data &#x3D; ihdr + high+ struct.pack(&#39;&gt;i&#39;, i)  + a</span><br><span class="line">        crc &#x3D; binascii.crc32(data) &amp; 0xffffffff</span><br><span class="line">        crc &#x3D; hex(crc)</span><br><span class="line">        if crc[2:] &#x3D;&#x3D; crctarget.hex():</span><br><span class="line">            print(&#39;Weight Wrong&#39;)</span><br><span class="line">            print(struct.pack(&#39;&gt;i&#39;, i).hex())</span><br><span class="line">            break</span><br><span class="line"># High wrong 000001d6</span><br></pre></td></tr></table></figure>
+
 <h2 id="文本编码："><a href="#文本编码：" class="headerlink" title="文本编码："></a>文本编码：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#encoding</span><br><span class="line">steg&#x3D; LSBSteg(cv2.imread(&quot;my_image.png&quot;))</span><br><span class="line">img_encoded&#x3D; steg.encode_text(&quot;my message&quot;)</span><br><span class="line">cv2.imwrite(&quot;my_new_image.png&quot;,img_encoded)</span><br><span class="line"> </span><br><span class="line">#decoding</span><br><span class="line">im &#x3D;cv2.imread(&quot;my_new_image.png&quot;)</span><br><span class="line">steg&#x3D; LSBSteg(im)</span><br><span class="line">print(&quot;Textvalue:&quot;,steg.decode_text())</span><br></pre></td></tr></table></figure>
 
 
@@ -654,7 +666,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2021 zhiliya
+    		&copy; 2023 zhiliya
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -737,11 +749,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
+                <a href="javascript:void(0)" class="js-tag color1">sql注入</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sql注入</a>
+                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -761,6 +773,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">wp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">rsa</a>
               </li>
              
@@ -773,10 +789,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">wp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">unctf</a>
               </li>
              
@@ -785,11 +797,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">密码学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文件读取</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">密码学</a>
+                <a href="javascript:void(0)" class="js-tag color2">大统一场理论</a>
               </li>
             
             <div class="clearfix"></div>
