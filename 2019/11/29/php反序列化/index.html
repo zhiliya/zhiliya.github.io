@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="emmmm 感觉没啥好说的"><meta name="theme-color" content="#2d4356"><meta name="baidu-site-verification"><title>php反序列化 | zhiliya</title><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.png"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="zhiliya" type="application/atom+xml">
+</head><link rel="stylesheet" type="text/css" href="/plugins/highlight/atom-one-dark.min.css"><script type="text/javascript" src="/plugins/highlight/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();
+</script><script type="text/javascript" src="/js/ready.js" async></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"><body class="night"><div class="mobile-head" id="mobile-head"><div class="navbar-icon"><span></span><span></span><span></span></div><div class="navbar-title"><a href="/">LITREILY</a></div><div class="navbar-search"><!--= show a circle here--></div></div><div class="h-wrapper" id="menu"><nav class="h-head box"><div class="m-hdimg"><a class="hdimg img" href="/"><img class="nofancybox" src="/img/profile.jpg" width="128" height="128"></a><h1 class="ttl"><a href="/">zhiliya</a></h1></div><p class="m-desc">心之所向，无惧无悔,<br>愿求仁得仁，复无怨怼！</p><div class="m-nav"><ul><li><span class="dot">●</span><a href="/archives/">归档</a></li><li><span class="dot">●</span><a href="/categories/">分类</a></li><li><span class="dot">●</span><a href="/tags/">标签</a></li><li><span class="dot">●</span><a href="/about/">关于</a></li><li><span class="dot">●</span><a href="/atom.xml">RSS</a></li><li class="m-sch"><form class="form" id="j-formsch" method="get"><input class="txt" type="text" id="local-search-input" name="q" value="搜索" onfocus="if(this.value=='搜索'){this.value='';}" onblur="if(this.value==''){this.value='搜索';}"><input type="text" style="display:none;"></form></li></ul><div id="local-search-result"></div></div></nav></div><div id="back2Top"><a class="fa fa-arrow-up" title="Back to top" href="#"></a></div><div class="box" id="container"><div class="l-wrapper"><div class="l-content box"><div class="l-post l-post-art"><article class="p-art"><div class="p-header box"><h1 class="p-title">php反序列化</h1><div class="p-info"><span class="p-date"><i class="fa fa-calendar"></i><a href="/2019/11/29/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">2019-11-29</a></span><span class="p-view" id="busuanzi_container_page_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_page_pv"></span></span></div></div><div class="p-content"><h4 id="反序列化漏洞-PHP-对象注入"><a href="#反序列化漏洞-PHP-对象注入" class="headerlink" title="反序列化漏洞   PHP 对象注入"></a>反序列化漏洞   PHP 对象注入</h4><p> 当 成 员 属 性 数 目 大 于 实 际 数 目 时 可 绕 过 wakeup方 法 (<strong>CVE-2016-7124</strong>)</p>
+<p>O%3A4%3A%22Name%22%3A3%3A%7Bs%3A14%3A%22%00Name%00username%22%3BN%3Bs%3A14%3A%22%00Name%00password%22%3BN%3B%7D<br>O%3A4%3A”Name”%3A3%3A%7Bs%3A14%3A”%00Name%00username”%3Bs%3A5%3A”admin”%3Bs%3A14%3A”%00Name%00password”%3Bi%3A100%3B%7D</p>
+<p>我们将上面 <code>test=O:1:”A”:1:{s:1:”a”;s:18:”&lt;?php phpinfo ();?&gt;”;}</code> 中 A 的个数变成 2 或者大于 2 的数字如下：</p>
+<blockquote>
+<p><code>test=O:1:”A”:2:{s:1:”a”;s:18:”&lt;?php phpinfo();?&gt;”;}</code></p>
+</blockquote>
+<p>然后再次执行发现绕过了__wakeup 函数，成功将 phpinfo () 写入 hello.php</p>
+<p> <strong>序列化一个对象将会保存对象的所有变量，但是不会保存对象的方法，只会保存类的名字。所以对象 A 和对象 B 序列化后并没有什么区别。</strong><br>unserialize () 函数能够重新把字符串变回 php 原来的值。 </p>
+<p> 漏洞的根源在于 unserialize () 函数的参数可控。如果反序列化对象中存在魔术方法，而且魔术方法中的代码有能够被我们控制，漏洞就这样产生了，根据不同的代码可以导致各种攻击，如代码注入、SQL 注入、目录遍历等等。 </p>
+<h4 id="要实现phar反序列化攻击有几个条件"><a href="#要实现phar反序列化攻击有几个条件" class="headerlink" title="要实现phar反序列化攻击有几个条件"></a>要实现phar反序列化攻击有几个条件</h4><p>①有一个类有__destruct魔术方法作为跳板<br>②有file_exsits()等函数,且函数内容可控  file_exists ()、is_dir () 等）<br>③没有过滤phar://内容 </p>
+<ol>
+<li>phar 文件要能够上传到服务器端。</li>
+</ol>
+<p>xxe触发反序列化：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version &#x3D; &quot;1.0&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE note [&lt;!ENTITY hacker SYSTEM &quot;phar:&#x2F;&#x2F;.&#x2F;uploads&#x2F;你上传的文件名&quot;&gt; ]&gt;  </span><br><span class="line">&lt;name&gt;&amp;hacker;&lt;&#x2F;name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>有序列化数据必然会有反序列化操作，php 一大部分的<a href="http://php.net/manual/en/ref.filesystem.php" target="_blank" rel="noopener">文件系统函数</a>在通过 <code>phar://</code> 伪协议解析 phar 文件时，都会将 meta-data 进行反序列化，测试后受影响的函数如下：</p>
+<p><img src="https://images.seebug.org/content/images/2018/08/17c4c630-b5f7-4e02-af48-160cd8fcf73a.png-w331s" alt="img"></p>
+<p> 当文件系统函数的参数可控时，我们可以在不调用 unserialize () 的情况下进行反序列化操作 </p>
+<h4 id="php的反序列化意味着可以控制类的属性"><a href="#php的反序列化意味着可以控制类的属性" class="headerlink" title="php的反序列化意味着可以控制类的属性"></a>php的反序列化意味着可以控制类的属性</h4></div><div class="p-copyright"><blockquote><div class="p-copyright-author"><span class="p-copyright-key">本文作者：</span><span class="p-copytight-value"><a href="mailto:litreily@163.com">zhiliya</a></span></div><div class="p-copyright-link"><span class="p-copyright-key">本文链接：</span><span class="p-copytight-value"><a href="/2019/11/29/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">http://yoursite.com/2019/11/29/php反序列化/</a></span></div><div class="p-copyright-note"><span class="p-copyright-key">版权声明：</span><span class="p-copytight-value">本博客所有文章除特殊声明外，均采用<a rel="nofollow" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/"> CC BY-NC 4.0 </a>许可协议。转载请注明出处 <a href="http://yoursite.com">zhiliya的博客</a>！</span></div></blockquote></div></article><div class="p-info box"></div><aside id="toc"><div class="toc-title">目录</div><nav><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#反序列化漏洞-PHP-对象注入"><span class="toc-number">1.</span> <span class="toc-text">反序列化漏洞   PHP 对象注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#要实现phar反序列化攻击有几个条件"><span class="toc-number">2.</span> <span class="toc-text">要实现phar反序列化攻击有几个条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#php的反序列化意味着可以控制类的属性"><span class="toc-number">3.</span> <span class="toc-text">php的反序列化意味着可以控制类的属性</span></a></li></ol></nav></aside></div><section class="p-ext"><div class="l-pager l-pager-dtl box"><a class="prev" href="/2019/12/07/docker/">&lt; docker</a><a class="next" href="/2019/11/29/rce/">rce &gt;</a></div><div id="valine-comment"><style type="text/css">.night .v[data-class=v] a { color: #0F9FB4 !important; }
+.night .v[data-class=v] a:hover { color: #216C73 !important; }
+.night .v[data-class=v] li { list-style: inherit; }
+.night .v[data-class=v] .vwrap { border: 1px solid #223441; border-radius: 0; }
+.night .v[data-class=v] .vwrap:hover { box-shadow: 0 0 6px 1px #223441; }
+.night .v[data-class=v] .vbtn { border-radius: 0; background: none; }
+.night .v[data-class=v] .vlist .vcard .vh { border-bottom-color: #293D4E; }
+.night .v[data-class=v] .vwrap .vheader .vinput { border-bottom-color: #223441; }
+.night .v[data-class=v] .vwrap .vheader .vinput:focus { border-bottom-color: #339EB4; }
+.night .v[data-class=v] code, .night .v[data-class=v] pre,.night .v[data-class=v] .vlist .vcard .vhead .vsys { background: #203240 !important; }
+.night .v[data-class=v] code, .night .v[data-class=v] pre { color: #F0F0F0; font-size: 95%; }
+.v[data-class=v] .vcards .vcard .vh {border-bottom-color: #223441; }
+.night .v[data-class=v] .vcards .vcard .vcontent.expand:before {background: linear-gradient(180deg,rgba(38,57,73,.4),rgba(38,57,73,.9));}
+.night .v[data-class=v] .vcards .vcard .vcontent.expand:after {background: rgba(38,57,73,.9)}
+</style><div id="vcomment"></div><script src="//cdn.bootcdn.net/ajax/libs/valine/1.4.14/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'',
+  appKey:'',
+  lang: 'zh-cn',
+  placeholder:'ヾﾉ≧∀≦)o Come on, say something...',
+  avatar:'identicon',
+  guest_info:guest_info,
+  pageSize:'10'
+})</script></div></section><footer><p>Copyright © 2016 - 2023 <a href="/." rel="nofollow">zhiliya</a> | <strong><a rel="nofollow" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></strong><br><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span></span> <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span></span> | Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a>Theme with<a rel="nofollow" target="_blank" href="https://github.com/litreily/snark-hexo"> snark.</a></p></footer></div></div></div><script type="text/javascript" src="/js/search.js"></script><script type="text/javascript" src="/js/top.js"></script><script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+    search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.1" async></script></body></html>

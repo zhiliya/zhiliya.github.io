@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="emmmm 感觉没啥好说的"><meta name="theme-color" content="#2d4356"><meta name="baidu-site-verification"><title>swpuctf_wp | zhiliya</title><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.png"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="zhiliya" type="application/atom+xml">
+</head><link rel="stylesheet" type="text/css" href="/plugins/highlight/atom-one-dark.min.css"><script type="text/javascript" src="/plugins/highlight/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();
+</script><script type="text/javascript" src="/js/ready.js" async></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"><body class="night"><div class="mobile-head" id="mobile-head"><div class="navbar-icon"><span></span><span></span><span></span></div><div class="navbar-title"><a href="/">LITREILY</a></div><div class="navbar-search"><!--= show a circle here--></div></div><div class="h-wrapper" id="menu"><nav class="h-head box"><div class="m-hdimg"><a class="hdimg img" href="/"><img class="nofancybox" src="/img/profile.jpg" width="128" height="128"></a><h1 class="ttl"><a href="/">zhiliya</a></h1></div><p class="m-desc">心之所向，无惧无悔,<br>愿求仁得仁，复无怨怼！</p><div class="m-nav"><ul><li><span class="dot">●</span><a href="/archives/">归档</a></li><li><span class="dot">●</span><a href="/categories/">分类</a></li><li><span class="dot">●</span><a href="/tags/">标签</a></li><li><span class="dot">●</span><a href="/about/">关于</a></li><li><span class="dot">●</span><a href="/atom.xml">RSS</a></li><li class="m-sch"><form class="form" id="j-formsch" method="get"><input class="txt" type="text" id="local-search-input" name="q" value="搜索" onfocus="if(this.value=='搜索'){this.value='';}" onblur="if(this.value==''){this.value='搜索';}"><input type="text" style="display:none;"></form></li></ul><div id="local-search-result"></div></div></nav></div><div id="back2Top"><a class="fa fa-arrow-up" title="Back to top" href="#"></a></div><div class="box" id="container"><div class="l-wrapper"><div class="l-content box"><div class="l-post l-post-art"><article class="p-art"><div class="p-header box"><h1 class="p-title">swpuctf_wp</h1><div class="p-info"><span class="p-date"><i class="fa fa-calendar"></i><a href="/2019/12/09/swpuctf-wp/">2019-12-09</a></span><span class="p-category"><i class="fa fa-folder"></i><a href="/categories/Misc/">Misc</a></span><span class="p-view" id="busuanzi_container_page_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_page_pv"></span></span></div></div><div class="p-content"><h3 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h3><h4 id="神秘的二维码"><a href="#神秘的二维码" class="headerlink" title="神秘的二维码"></a>神秘的二维码</h4><p><code>binwalk -e  BitcoinPay.png</code>   //工具自己找百度相关关键字 教程一大堆</p>
+<p><img src="/2019/12/09/swpuctf-wp/image-20191208222916302.png" alt="image-20191208222916302"></p>
+<p>出来四个压缩包</p>
+<p>按文件次序</p>
+<p>7104.rar直接解压出来encode.txt</p>
+<p>YXNkZmdoamtsMTIzNDU2Nzg5MA== </p>
+<p>base64解码</p>
+<p>asdfghjkl1234567890</p>
+<p>是下一个压缩包716A.rar中的“看看flag在不在里面^_^.rar”压缩包的密码</p>
+<p>解压</p>
+<p><img src="/2019/12/09/swpuctf-wp/image-20191209100401459.png" alt="image-20191209100401459"></p>
+<p><img src="/2019/12/09/swpuctf-wp/image-20191209103415755.png" alt="image-20191209103415755"></p>
+<p>经比较 两张图片没有任何差异</p>
+<p>前两个压缩包是用来误导的</p>
+<p>17012.rar</p>
+<p>解压出来flag.doc</p>
+<p>里面是多次base64编码的字符串</p>
+<p>上脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">stc = input(<span class="string">"输入需要进行解码的BASE64码：\n"</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">base64count</span><span class="params">(src)</span>:</span></span><br><span class="line">    print(<span class="string">"开始.."</span>)</span><br><span class="line">    num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            src = base64.b64decode(src)</span><br><span class="line">            num = num + <span class="number">1</span></span><br><span class="line">            print(<span class="string">"解码中,第%d次"</span> % (num),src)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">"结束"</span>)</span><br><span class="line">        <span class="keyword">return</span> src</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(base64count(stc))</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/12/09/swpuctf-wp/image-20191209103747691.png" alt="image-20191209103747691"></p>
+<p>comEON_YOuAreSOSoS0great</p>
+<p>此为下一个压缩包18394.rar的密码</p>
+<p><img src="/2019/12/09/swpuctf-wp/image-20191209103832856.png" alt="image-20191209103832856"></p>
+<p>解压</p>
+<p>audacity打开 //自己下</p>
+<p><img src="/2019/12/09/swpuctf-wp/image-20191209104232324.png" alt="image-20191209104232324"></p>
+<p>摩尔斯码</p>
+<p>长为<code>-</code> 短为<code>.</code></p>
+<p><code>-- --- .-. ... . .. ... ...- . .-. ...- . .-. -.-- . .- ... -.--</code></p>
+<p><img src="/2019/12/09/swpuctf-wp/image-20191209110331425.png" alt="image-20191209110331425"></p>
+<p>解码morseisververyeasy </p>
+<p>flag:swpuctf{morseisveryveryeasy}</p>
+<h4 id="漂流的马里奥"><a href="#漂流的马里奥" class="headerlink" title="漂流的马里奥"></a>漂流的马里奥</h4><p>执行exe</p>
+<p><img src="/2019/12/09/swpuctf-wp/image-20191209181445040.png" alt="image-20191209181445040"></p>
+<p><img src="/2019/12/09/swpuctf-wp/image-20191209181513875.png" alt="image-20191209181513875"></p>
+<p>提示ntfs</p>
+<p><img src="/2019/12/09/swpuctf-wp/image-20191209181536242.png" alt="image-20191209181536242"></p>
+<p>工具打开该文件夹</p>
+<p>点击搜索</p>
+<p><img src="/2019/12/09/swpuctf-wp/image-20191209181617709.png" alt="image-20191209181617709"></p>
+<p><img src="/2019/12/09/swpuctf-wp/image-20191209181628068.png" alt="image-20191209181628068"></p>
+<p>swupctf{ddg_is_cute}</p>
+<p>另：</p>
+<p>也可以⽤用cmd下的dir /r查看，就可以发现<br>然后notepad 1.txt:flag.txt 就可以看到flag了了</p>
+<p><img src="/2019/12/09/swpuctf-wp/image-20191209181719540.png" alt="image-20191209181719540"></p>
+<p><img src="/2019/12/09/swpuctf-wp/image-20191209181732032.png" alt="image-20191209181732032"></p>
+<h4 id="network"><a href="#network" class="headerlink" title="network"></a>network</h4><p>解压</p>
+<p><img src="/2019/12/09/swpuctf-wp/image-20191209181827400.png" alt="image-20191209181827400"></p>
+<p>打开发现⾥里里⾯面数据量量很⼤大，但是却只出现了了四个数字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">63 00111111</span><br><span class="line">127 01111111</span><br><span class="line">191 10111111</span><br><span class="line">255 11111111</span><br></pre></td></tr></table></figure>
+
+<p>很容易易想到这是⼀一个 TTL 隐写，每⼀一个 TTL 只有前两位隐藏数据，每四个为⼀一组，隐藏⼀一个字节<br>使⽤用脚本恢复⼀一下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">fp = open(<span class="string">'ttl.txt'</span>,<span class="string">'r'</span>)</span><br><span class="line">a = fp.readlines()</span><br><span class="line">p = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> a:</span><br><span class="line">    p.append(int(i))</span><br><span class="line">s = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> p:</span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">63</span>:</span><br><span class="line">        a = <span class="string">'00'</span></span><br><span class="line">    <span class="keyword">elif</span> i == <span class="number">127</span>:</span><br><span class="line">        a = <span class="string">'01'</span></span><br><span class="line">    <span class="keyword">elif</span> i == <span class="number">191</span>:</span><br><span class="line">        a = <span class="string">'10'</span></span><br><span class="line">    <span class="keyword">elif</span> i == <span class="number">255</span>:</span><br><span class="line">        a = <span class="string">'11'</span></span><br><span class="line">    s += a</span><br><span class="line">print(s)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(s),<span class="number">8</span>):</span><br><span class="line">    flag += chr(int(s[i:i+<span class="number">8</span>],<span class="number">2</span>))</span><br><span class="line">flag = binascii.unhexlify(flag)</span><br><span class="line">wp = open(<span class="string">'res.jpg'</span>,<span class="string">'wb'</span>)</span><br><span class="line">wp.write(flag)</span><br><span class="line">wp.close()</span><br><span class="line"><span class="comment">#00111111 63</span></span><br><span class="line"><span class="comment">#01111111 127</span></span><br><span class="line"><span class="comment">#10111111 191</span></span><br><span class="line"><span class="comment">#11111111 255</span></span><br></pre></td></tr></table></figure>
+
+<p>⽤用 winhex 打开发现⽂文件头为 504B0304</p>
+<p><img src="/2019/12/09/swpuctf-wp/image-20191209182055527.png" alt="image-20191209182055527"></p>
+<p>PK:zip的文件头</p>
+<p>改成.zip文件 解压</p>
+<p>发现加密，这是⼀一个伪加密，找到全局⽅方式位标记，修改为偶数即可消除加密状<br>态</p>
+<p>也可以用工具</p>
+<p><img src="/2019/12/09/swpuctf-wp/image-20191209182229896.png" alt="image-20191209182229896"></p>
+<p>java -jar ZipCenOp.jar r res.zip</p>
+<p><img src="/2019/12/09/swpuctf-wp/image-20191209182328285.png" alt="image-20191209182328285"></p>
+<p>解压出 flag.txt ⽂文件，是一串多次 base64 编码的字符串</p>
+<p>上脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">stc = input(<span class="string">"输入需要进行解码的BASE64码：\n"</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">base64count</span><span class="params">(src)</span>:</span></span><br><span class="line">    print(<span class="string">"开始.."</span>)</span><br><span class="line">    num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            src = base64.b64decode(src)</span><br><span class="line">            num = num + <span class="number">1</span></span><br><span class="line">            print(<span class="string">"解码中,第%d次"</span> % (num),src)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">"结束"</span>)</span><br><span class="line">        <span class="keyword">return</span> src</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(base64count(stc))</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/12/09/swpuctf-wp/image-20191209182535974.png" alt="image-20191209182535974"></p>
+<p>flag{189ff9e5b743ae95f940a6ccc6dbd9ab}</p>
+</div><div class="p-copyright"><blockquote><div class="p-copyright-author"><span class="p-copyright-key">本文作者：</span><span class="p-copytight-value"><a href="mailto:litreily@163.com">zhiliya</a></span></div><div class="p-copyright-link"><span class="p-copyright-key">本文链接：</span><span class="p-copytight-value"><a href="/2019/12/09/swpuctf-wp/">http://yoursite.com/2019/12/09/swpuctf-wp/</a></span></div><div class="p-copyright-note"><span class="p-copyright-key">版权声明：</span><span class="p-copytight-value">本博客所有文章除特殊声明外，均采用<a rel="nofollow" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/"> CC BY-NC 4.0 </a>许可协议。转载请注明出处 <a href="http://yoursite.com">zhiliya的博客</a>！</span></div></blockquote></div></article><div class="p-info box"><span class="p-tags"><i class="fa fa-tag"></i><a href="/tags/wp/">wp</a></span></div><aside id="toc"><div class="toc-title">目录</div><nav><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Misc"><span class="toc-number">1.</span> <span class="toc-text">Misc</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#神秘的二维码"><span class="toc-number">1.1.</span> <span class="toc-text">神秘的二维码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#漂流的马里奥"><span class="toc-number">1.2.</span> <span class="toc-text">漂流的马里奥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#network"><span class="toc-number">1.3.</span> <span class="toc-text">network</span></a></li></ol></li></ol></nav></aside></div><section class="p-ext"><div class="l-pager l-pager-dtl box"><a class="prev" href="/2019/12/09/web/">&lt; web</a><a class="next" href="/2019/12/07/docker/">docker &gt;</a></div><div id="valine-comment"><style type="text/css">.night .v[data-class=v] a { color: #0F9FB4 !important; }
+.night .v[data-class=v] a:hover { color: #216C73 !important; }
+.night .v[data-class=v] li { list-style: inherit; }
+.night .v[data-class=v] .vwrap { border: 1px solid #223441; border-radius: 0; }
+.night .v[data-class=v] .vwrap:hover { box-shadow: 0 0 6px 1px #223441; }
+.night .v[data-class=v] .vbtn { border-radius: 0; background: none; }
+.night .v[data-class=v] .vlist .vcard .vh { border-bottom-color: #293D4E; }
+.night .v[data-class=v] .vwrap .vheader .vinput { border-bottom-color: #223441; }
+.night .v[data-class=v] .vwrap .vheader .vinput:focus { border-bottom-color: #339EB4; }
+.night .v[data-class=v] code, .night .v[data-class=v] pre,.night .v[data-class=v] .vlist .vcard .vhead .vsys { background: #203240 !important; }
+.night .v[data-class=v] code, .night .v[data-class=v] pre { color: #F0F0F0; font-size: 95%; }
+.v[data-class=v] .vcards .vcard .vh {border-bottom-color: #223441; }
+.night .v[data-class=v] .vcards .vcard .vcontent.expand:before {background: linear-gradient(180deg,rgba(38,57,73,.4),rgba(38,57,73,.9));}
+.night .v[data-class=v] .vcards .vcard .vcontent.expand:after {background: rgba(38,57,73,.9)}
+</style><div id="vcomment"></div><script src="//cdn.bootcdn.net/ajax/libs/valine/1.4.14/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'',
+  appKey:'',
+  lang: 'zh-cn',
+  placeholder:'ヾﾉ≧∀≦)o Come on, say something...',
+  avatar:'identicon',
+  guest_info:guest_info,
+  pageSize:'10'
+})</script></div></section><footer><p>Copyright © 2016 - 2023 <a href="/." rel="nofollow">zhiliya</a> | <strong><a rel="nofollow" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></strong><br><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span></span> <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span></span> | Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a>Theme with<a rel="nofollow" target="_blank" href="https://github.com/litreily/snark-hexo"> snark.</a></p></footer></div></div></div><script type="text/javascript" src="/js/search.js"></script><script type="text/javascript" src="/js/top.js"></script><script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+    search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.1" async></script></body></html>

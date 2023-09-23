@@ -1,0 +1,199 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="emmmm 感觉没啥好说的"><meta name="theme-color" content="#2d4356"><meta name="baidu-site-verification"><title>sql一套 | zhiliya</title><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.png"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="zhiliya" type="application/atom+xml">
+</head><link rel="stylesheet" type="text/css" href="/plugins/highlight/atom-one-dark.min.css"><script type="text/javascript" src="/plugins/highlight/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();
+</script><script type="text/javascript" src="/js/ready.js" async></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"><body class="night"><div class="mobile-head" id="mobile-head"><div class="navbar-icon"><span></span><span></span><span></span></div><div class="navbar-title"><a href="/">LITREILY</a></div><div class="navbar-search"><!--= show a circle here--></div></div><div class="h-wrapper" id="menu"><nav class="h-head box"><div class="m-hdimg"><a class="hdimg img" href="/"><img class="nofancybox" src="/img/profile.jpg" width="128" height="128"></a><h1 class="ttl"><a href="/">zhiliya</a></h1></div><p class="m-desc">心之所向，无惧无悔,<br>愿求仁得仁，复无怨怼！</p><div class="m-nav"><ul><li><span class="dot">●</span><a href="/archives/">归档</a></li><li><span class="dot">●</span><a href="/categories/">分类</a></li><li><span class="dot">●</span><a href="/tags/">标签</a></li><li><span class="dot">●</span><a href="/about/">关于</a></li><li><span class="dot">●</span><a href="/atom.xml">RSS</a></li><li class="m-sch"><form class="form" id="j-formsch" method="get"><input class="txt" type="text" id="local-search-input" name="q" value="搜索" onfocus="if(this.value=='搜索'){this.value='';}" onblur="if(this.value==''){this.value='搜索';}"><input type="text" style="display:none;"></form></li></ul><div id="local-search-result"></div></div></nav></div><div id="back2Top"><a class="fa fa-arrow-up" title="Back to top" href="#"></a></div><div class="box" id="container"><div class="l-wrapper"><div class="l-content box"><div class="l-post l-post-art"><article class="p-art"><div class="p-header box"><h1 class="p-title">sql一套</h1><div class="p-info"><span class="p-date"><i class="fa fa-calendar"></i><a href="/2019/12/20/sql%E4%B8%80%E5%A5%97/">2019-12-20</a></span><span class="p-view" id="busuanzi_container_page_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_page_pv"></span></span></div></div><div class="p-content"><blockquote>
+<p>不管用什么语言编写的 Web 应用，它们都用一个共同点，具有交互性并且多数是数据库驱动。在网络中，数据库驱动的 Web 应用随处可见，由此而存在的 SQL 注入是影响企业运营且最具破坏性的漏洞之一。</p>
+</blockquote>
+<p>**前言：<br>这是一张相当有技术含量的号牌遮挡，其对交警系统 SQL Injection 的 hack 䅁例。当摄像头拍到你车牌号并把其转成文本后，插入数据库时的 SQL 注入。看到了吧，千万别惹程序员。</p>
+<p>**</p>
+<p><strong><img src="https://bbs.ichunqiu.com/data/attachment/forum/201703/17/153931bv7s2qqmmd6pr6qs.png" alt="img"></strong> </p>
+<p>**什么是 SQL 注入</p>
+<p>**</p>
+<p><strong>SQL 注入基本介绍</strong></p>
+<p>结构化查询语言（Structured Query Language，缩写：SQL），是一种特殊的编程语言，用于数据库中的标准数据查询语言。1986 年 10 月，美国国家标准学会对 SQL 进行规范后，以此作为关系式数据库管理系统的标准语言（ANSI X3. 135-1986），1987 年得到国际标准组织的支持下成为国际标准。不过各种通行的<a href="http://www.ichunqiu.com/courses/277" target="_blank" rel="noopener">数据库系统</a>在其实践过程中都对 SQL 规范作了某些编改和扩充。所以，实际上不同数据库系统之间的 SQL 不能完全相互通用。</p>
+<p>SQL 注入（SQL Injection）是一种常见的 <a href="http://www.ichunqiu.com/courses/263" target="_blank" rel="noopener">web 安全</a>漏洞，攻击者利用这个问题，可以访问或修改数据，或者利用潜在的数据库漏洞进行攻击。</p>
+<p><strong>SQL 注入产生原因</strong></p>
+<p>针对 SQL 注入的攻击行为可描述为通过在用户可控参数中注入 SQL 语法，破坏原有 SQL 结构，达到编写程序时意料之外结果的攻击行为。其成因可以归结为以下两个原因叠加造成的：</p>
+<p>\1. 程序编写者在处理应用程序和数据库交互时，使用字符串拼接的方式构造 SQL 语句</p>
+<p>\2. 未对用户可控参数进行足够的过滤便将参数内容拼接进入到 SQL 语句中<br>**<br><a href="http://www.ichunqiu.com/courses/277" target="_blank" rel="noopener">sql 注入攻击</a>方式<br>**<br>SQL 注入的攻击方式根据应用程序处理数据库返回内容的不同，可以分为可显注入、报错注入和盲注：</p>
+<p>1、可显注入：攻击者可以直接在当前界面内容中获取想要获得的内容</p>
+<p>2、报错注入：数据库查询返回结果并没有在页面中显示，但是应用程序将数据库报错信息打印到了页面中，所以攻击者可以构造数据库报错语句，从报错信息中获取想要获得的内容</p>
+<p>3、盲注：数据库查询结果无法从直观页面中获取，攻击者通过使用数据库逻辑或使数据库库执行延时等方法获取想要获得的内容</p>
+<p>**如何进行 SQL 注入攻击</p>
+<p>**</p>
+<blockquote>
+<p>SQL 注入攻击是非常令人讨厌的安全漏洞，是所有的 web 开发人员，不管是什么平台，技术，还是数据层，需要确信他们理解和防止的东西。不幸的是，开发人员往往不集中花点时间在这上面，以至他们的应用，更糟糕的是，他们的客户极其容易受到攻击。下面的三部曲从漏洞发现到漏洞确认，再到漏洞利用，最后漏洞防御四个方面的技术做了详细的讲解。</p>
+</blockquote>
+<p>**<br>SQL 注入三部曲：<br>**</p>
+<p>1、 渗透攻防 Web 篇 - SQL 注入攻击初级</p>
+<p><a href="http://bbs.ichunqiu.com/thread-9518-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-9518-1-1.html</a></p>
+<p>2、 渗透攻防 Web 篇 - SQL 注入攻击中级</p>
+<p><a href="http://bbs.ichunqiu.com/thread-9668-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-9668-1-1.html</a></p>
+<p>3、 渗透攻防 Web 篇 - SQL 注入攻击高级</p>
+<p><a href="http://bbs.ichunqiu.com/thread-10093-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-10093-1-1.html</a></p>
+<p>**<br>SQL 注入经验与技巧<br>**</p>
+<blockquote>
+<p>经验很重要，成功往往在多次失败之后。要想减少失败，就多看文章积累技巧吧，下面集合了论坛相关技术文章，从各个方面介绍了 SQL 注入。</p>
+</blockquote>
+<p>**<br>**</p>
+<p>1、 SQL 学习笔记</p>
+<p><a href="http://bbs.ichunqiu.com/thread-2274-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-2274-1-1.html</a></p>
+<p>2、 人人都可学会的 MySQL 高级注射技巧</p>
+<p><a href="http://bbs.ichunqiu.com/thread-10359-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-10359-1-1.html</a></p>
+<p>3、 详解 MySQL 注射</p>
+<p><a href="http://bbs.ichunqiu.com/thread-10222-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-10222-1-1.html</a></p>
+<p>4、 浅谈.NET 应用程序 SQL 注入</p>
+<p><a href="http://bbs.ichunqiu.com/thread-7636-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-7636-1-1.html</a></p>
+<p>5、 在 SQL 注入中使用 DNS 获取数据</p>
+<p><a href="http://bbs.ichunqiu.com/thread-10005-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-10005-1-1.html</a></p>
+<p>6、 WEB 安全系列之如何挖掘 sql 注入漏洞（二次注入）</p>
+<p><a href="http://bbs.ichunqiu.com/thread-9193-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-9193-1-1.html</a></p>
+<p>7、深入了解 php+mysql 注入及修补！</p>
+<p><a href="http://bbs.ichunqiu.com/thread-10090-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-10090-1-1.html</a></p>
+<p>8、技巧整合 - mysql 注入点的另类利用</p>
+<p><a href="http://bbs.ichunqiu.com/thread-9903-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-9903-1-1.html</a></p>
+<p>9、浅谈 sql 注入中的 Post 注入</p>
+<p><a href="http://bbs.ichunqiu.com/thread-7762-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-7762-1-1.html</a></p>
+<p><strong>相关教程</strong></p>
+<p><strong>工具教程篇：</strong></p>
+<p>1、 SQLMAP 注入教程 - 11 种常见 SQLMAP 使用方法详解</p>
+<p><a href="http://bbs.ichunqiu.com/thread-10583-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-10583-1-1.html</a></p>
+<p>2、 SQLMAP tamper WAF 绕过脚本列表注释</p>
+<p><a href="http://bbs.ichunqiu.com/thread-10387-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-10387-1-1.html</a></p>
+<p>3、零基础实战审计 SQL 注射漏洞</p>
+<p><a href="http://bbs.ichunqiu.com/thread-10284-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-10284-1-1.html</a></p>
+<p>4、被动式 SQL 注入神器总结</p>
+<p><a href="http://bbs.ichunqiu.com/thread-8428-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-8428-1-1.html</a></p>
+<p>5、利用 Burpsuit 学习注入工具语句</p>
+<p><a href="http://bbs.ichunqiu.com/thread-8319-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-8319-1-1.html</a></p>
+<p><strong>代码审计篇**</strong>:**</p>
+<p>1、 PHP 代码审计 SQL 注入</p>
+<p><a href="http://bbs.ichunqiu.com/thread-11308-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-11308-1-1.html</a></p>
+<p>2、Joomla 3.xSql 注入漏洞分析</p>
+<p><a href="http://bbs.ichunqiu.com/thread-1689-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-1689-1-1.html</a></p>
+<p>3、 浅谈 JSP 安全开发之 SQL 注入</p>
+<p><a href="http://bbs.ichunqiu.com/thread-9958-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-9958-1-1.html</a></p>
+<p>4、 代码审计之绕过 addslashes 总结</p>
+<p><a href="http://bbs.ichunqiu.com/thread-10899-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-10899-1-1.html</a></p>
+<p>**<br>相关技术及文档：**</p>
+<p>1、 mysql 数据库学习</p>
+<p><a href="http://bbs.ichunqiu.com/thread-11248-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-11248-1-1.html</a></p>
+<p>2、 SQL 注入自学指南</p>
+<p><a href="http://bbs.ichunqiu.com/thread-2141-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-2141-1-1.html</a></p>
+<p>3、 mssql 注入经常使用的命令</p>
+<p><a href="http://bbs.ichunqiu.com/thread-3221-1-1.html" target="_blank" rel="noopener">http://bbs.ichunqiu.com/thread-3221-1-1.html</a></p>
+<p>**<br>专业的视频教程 - 告别文字的枯燥</p>
+<p>1、SQL 注入漏洞 - 视频 + 实验：活学活用</p>
+<p><strong><a href="http://www.ichunqiu.com/course/405" target="_blank" rel="noopener">http://www.ichunqiu.com/course/405</a></strong></p>
+<p>2、SQL 注入漏洞审计及漏洞挖掘</p>
+<p><strong><a href="http://www.ichunqiu.com/course/1325" target="_blank" rel="noopener">http://www.ichunqiu.com/course/1325</a></strong></p>
+<p>3、科普类 - SQL（结构化查询语言）注入攻击的好处</p>
+<p>**</p>
+<ul>
+<li>改变 SQL（结构化查询语言）代码来掩盖你的攻击 </li>
+<li>进行 SQL（结构化查询语言）注入攻击 </li>
+<li>解释一个 SQL（结构化查询语言）注入攻击 </li>
+</ul>
+<p>**<br><strong><a href="http://www.ichunqiu.com/course/51849" target="_blank" rel="noopener">http://www.ichunqiu.com/course/51849</a></strong></p>
+<p>4、SQL 注入漏洞发现及修补技术（有攻有防才是王道）</p>
+<p><strong><a href="http://www.ichunqiu.com/course/77" target="_blank" rel="noopener">http://www.ichunqiu.com/course/77</a></strong></p>
+<p>SQL 注入工具</p>
+<p>1、SQLmap</p>
+<p>**</p>
+<blockquote>
+<p>sqlmap 是一个开源的<a href="http://bbs.ichunqiu.com/portal.php" target="_blank" rel="noopener">渗透测试</a>工具，可以用来自动化的检测，利用 SQL 注入漏洞，获取数据库服务器的权限。它具有功能强大的检测引擎，针对各种不同类型数据库的渗透测试的功能选项，包括获取数据库中存储的数据，访问操作系统文件甚至可以通过外带数据连接的方式执行操作系统命令。</p>
+</blockquote>
+<p>**<br><strong>项目地址：<a href="https://github.com/sqlmapproject/sqlmap" target="_blank" rel="noopener">https://github.com/sqlmapproject/sqlmap</a></strong></p>
+<p>2、SSQLInjection</p>
+<p>**</p>
+<blockquote>
+<p>超级 SQL 注入工具（SSQLInjection）是一款基于 HTTP 协议自组包的 SQL 注入工具，支持出现在 HTTP 协议任意位置的 SQL 注入，支持各种类型的 SQL 注入，支持 HTTPS 模式注入。目前支持 Bool 型盲注、错误显示注入、Union 注入，支持 Access、MySQL5 以上版本、SQLServer、Oracle 等数据库。采用 C# 开发，底层采用 Socket 发包进行 HTTP 交互，极大的提升了发包效率，相比 C# 自带的 HttpWebRequest 速度提升 2-5 倍。支持盲注环境获取世界各国语言数据，直接秒杀各种注入工具在盲注环境下无法支持中文等多字节编码的数据。</p>
+</blockquote>
+<p>项目地址：<a href="http://www.shack2.org/article/1417357815.html" target="_blank" rel="noopener">http://www.shack2.org/article/1417357815.html</a>**</p>
+<p>3、Pangolin</p>
+<p>**</p>
+<blockquote>
+<p>Pangolin 是一款帮助渗透测试人员进行 SQL 注入测试的安全工具。它具备友好的图形界面以及支持测试几乎所有数据库，并能够通过一系列非常简单的操作，达到最大化的攻击测试效果。</p>
+</blockquote>
+<p>**收费的，所以不放项目地址。</p>
+<p>4、****Havij</p>
+<p>**</p>
+<blockquote>
+<p>Havij 是一款自动化的 SQL 注入工具，它不仅能够自动挖掘可利用的 SQL 查询，还能够识别后台数据库类型、检索数据的用户名和密码 hash、转储表和列、从数据库中提取数据，甚至访问底层文件系统和执行系统命令。</p>
+</blockquote>
+<p>**收费的，所以不放项目地址。</p>
+<p>5、The Mole</p>
+<p>**</p>
+<blockquote>
+<p>The Mole 是一款开源的自动化 SQL 注入工具，其可绕过 IPS/IDS（入侵防御系统 / <a href="http://www.ichunqiu.com/course/298?bbs" target="_blank" rel="noopener">入侵检测系统</a>）。只需提供一个 URL 和一个可用的关键字，它就能够检测注入点并利用。The Mole 可以使用 union 注入技术和基于逻辑查询的注入技术。The Mole 攻击范围包括 SQL Server、MySQL、Postgres 和 Oracle 数据库。</p>
+</blockquote>
+<p>**<br>**项目地址：nasel.com.ar</p>
+<p>**<br>6、SQLNinja</p>
+<p>**</p>
+<blockquote>
+<p>sqlninja 是一款用 perl 写的一个专门针对 Microsoft SQL Server 的 sql 注入工具。和市面上其他的注入工具不同，sqlninja 没有将精力用在跑数据库上，而是侧重于获得一个 shell。</p>
+</blockquote>
+<p>项目地址：<a href="http://www.northernfortress.net/" target="_blank" rel="noopener">http://www.northernfortress.net/</a></p>
+<p>kali 自带工具</p>
+<p><strong>7、BBQSQL</strong></p>
+<blockquote>
+<p>BBQSQL 是一个 Python 编写的盲注工具（blind SQL injection framework），当你检测可疑的注入漏洞时会很有用。同时 BBQSQL 是一个半自动工具，允许客户自定义参数。</p>
+</blockquote>
+<p>项目地址：<a href="https://github.com/Neohapsis/bbqsql/" target="_blank" rel="noopener">https://github.com/Neohapsis/bbqsql/</a></p>
+<p>**8、Jsql</p>
+<p>**</p>
+<blockquote>
+<p>JSQL 是一款 Java 开发的轻量级远程服务器数据库注入漏洞测试工具，且免费、开源、跨平台 (Windows, Linux, Mac OS X, Solaris)。</p>
+</blockquote>
+<p>项目地址：<a href="https://code.google.com/p/jsql-injection/downloads/list" target="_blank" rel="noopener">https://code.google.com/p/jsql-injection/downloads/list</a>**</p>
+<hr>
+<p>9、****Sqlsus</p>
+<p>**</p>
+<blockquote>
+<p>sqlsus 是一个开放源代码的 MySQL 注入和接管工具，sqlsus 使用 perl 编写，基于命令行界面。sqlsus 可以获取数据库结构，注入你自己的 SQL 语句，从服务器下载文件，爬行 web 站点可写目录，上传和控制后门，克隆数据库等等</p>
+</blockquote>
+<p>项目地址：<a href="http://sqlsus.sourceforge.net/download.html" target="_blank" rel="noopener">http://sqlsus.sourceforge.net/download.html</a>**</p>
+<p>10、****<em>\</em>SQL Poizon</p>
+<p>****</p>
+<blockquote>
+<p>SQL Poizon 是一个 SQL 注入扫描器，能够利用搜索引擎搜罗互联网上有 SQL 注入漏洞的网站。该工具内建浏览器和注入任务工具检查注入效果。SQL Poizon 的界面非常简单，即使没有多少技术功底的人也能轻松上手。</p>
+</blockquote>
+<p>这个很老了就不提供地址了，互联网上很多。</p>
+</div><div class="p-copyright"><blockquote><div class="p-copyright-author"><span class="p-copyright-key">本文作者：</span><span class="p-copytight-value"><a href="mailto:litreily@163.com">zhiliya</a></span></div><div class="p-copyright-link"><span class="p-copyright-key">本文链接：</span><span class="p-copytight-value"><a href="/2019/12/20/sql%E4%B8%80%E5%A5%97/">http://yoursite.com/2019/12/20/sql一套/</a></span></div><div class="p-copyright-note"><span class="p-copyright-key">版权声明：</span><span class="p-copytight-value">本博客所有文章除特殊声明外，均采用<a rel="nofollow" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/"> CC BY-NC 4.0 </a>许可协议。转载请注明出处 <a href="http://yoursite.com">zhiliya的博客</a>！</span></div></blockquote></div></article><div class="p-info box"></div><aside id="toc"><div class="toc-title">目录</div><nav></nav></aside></div><section class="p-ext"><div class="l-pager l-pager-dtl box"><a class="prev" href="/2020/07/25/sqlmap/">&lt; sqlmap</a><a class="next" href="/2019/12/20/webshell/">webshell &gt;</a></div><div id="valine-comment"><style type="text/css">.night .v[data-class=v] a { color: #0F9FB4 !important; }
+.night .v[data-class=v] a:hover { color: #216C73 !important; }
+.night .v[data-class=v] li { list-style: inherit; }
+.night .v[data-class=v] .vwrap { border: 1px solid #223441; border-radius: 0; }
+.night .v[data-class=v] .vwrap:hover { box-shadow: 0 0 6px 1px #223441; }
+.night .v[data-class=v] .vbtn { border-radius: 0; background: none; }
+.night .v[data-class=v] .vlist .vcard .vh { border-bottom-color: #293D4E; }
+.night .v[data-class=v] .vwrap .vheader .vinput { border-bottom-color: #223441; }
+.night .v[data-class=v] .vwrap .vheader .vinput:focus { border-bottom-color: #339EB4; }
+.night .v[data-class=v] code, .night .v[data-class=v] pre,.night .v[data-class=v] .vlist .vcard .vhead .vsys { background: #203240 !important; }
+.night .v[data-class=v] code, .night .v[data-class=v] pre { color: #F0F0F0; font-size: 95%; }
+.v[data-class=v] .vcards .vcard .vh {border-bottom-color: #223441; }
+.night .v[data-class=v] .vcards .vcard .vcontent.expand:before {background: linear-gradient(180deg,rgba(38,57,73,.4),rgba(38,57,73,.9));}
+.night .v[data-class=v] .vcards .vcard .vcontent.expand:after {background: rgba(38,57,73,.9)}
+</style><div id="vcomment"></div><script src="//cdn.bootcdn.net/ajax/libs/valine/1.4.14/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'',
+  appKey:'',
+  lang: 'zh-cn',
+  placeholder:'ヾﾉ≧∀≦)o Come on, say something...',
+  avatar:'identicon',
+  guest_info:guest_info,
+  pageSize:'10'
+})</script></div></section><footer><p>Copyright © 2016 - 2023 <a href="/." rel="nofollow">zhiliya</a> | <strong><a rel="nofollow" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></strong><br><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span></span> <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span></span> | Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a>Theme with<a rel="nofollow" target="_blank" href="https://github.com/litreily/snark-hexo"> snark.</a></p></footer></div></div></div><script type="text/javascript" src="/js/search.js"></script><script type="text/javascript" src="/js/top.js"></script><script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+    search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.1" async></script></body></html>
