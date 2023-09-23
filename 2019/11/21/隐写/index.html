@@ -1,12 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="zhiliya" type="application/atom+xml">
 
-  
-  <title>隐写 | zhiliya</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
   <meta name="description" content="winhex去看和binwalk 文件属性里面最多是提示信息和解密秘钥所在 strings  -o  flag.xls | grep zjctfdd if&#x3D;1.jpg of&#x3D;2.rar skip&#x3D;6391983 bs&#x3D;1binwalk -ebinwalk  -D:jpeg(txt)  a.jpg -M(递归)data:image&#x2F;jpg;base64,iVBORw0KGgoAAAANSUhEUgA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="隐写">
@@ -40,79 +84,164 @@
 <meta property="article:author" content="zhiliya">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2019/11/21/%E9%9A%90%E5%86%99/image-20200723133826028.png">
-  
-    <link rel="alternate" href="/atom.xml" title="zhiliya" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<link rel="canonical" href="http://yoursite.com/2019/11/21/%E9%9A%90%E5%86%99/">
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">zhiliya</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">欢迎访问我的博客</a>
-        </h2>
-      
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>隐写 | zhiliya</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhiliya</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
+        <p class="site-subtitle">欢迎访问我的博客</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-隐写" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/11/21/%E9%9A%90%E5%86%99/" class="article-date">
-  <time datetime="2019-11-21T12:20:16.000Z" itemprop="datePublished">2019-11-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      隐写
-    </h1>
-  
+</div>
 
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/21/%E9%9A%90%E5%86%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="zhiliya">
+      <meta itemprop="description" content="emmmm 感觉没啥好说的">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhiliya">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          隐写
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-21 20:20:16" itemprop="dateCreated datePublished" datetime="2019-11-21T20:20:16+08:00">2019-11-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-29 18:50:40" itemprop="dateModified" datetime="2021-12-29T18:50:40+08:00">2021-12-29</time>
+              </span>
+
+          
+
+        </div>
       </header>
+
     
-    <div class="article-entry" itemprop="articleBody">
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
         <p>winhex去看和binwalk</p>
 <p>文件属性里面最多是提示信息和解密秘钥所在</p>
@@ -434,151 +563,190 @@
 <h2 id="unique"><a href="#unique" class="headerlink" title="unique"></a>unique</h2><p>unique工具可以从一个密码字典中去除重复行，为我们使用密码字典进行爆破提供了很大的便利。<br>unique -v -inp=allwords.txt uniques.txt<br>Total lines read 6089 Unique lines written 5083</p>
 <h2 id="john"><a href="#john" class="headerlink" title="john"></a>john</h2><p>john –format=sha512crypt shadow<br>john –wordlist=uniques.txt –format=sha512crypt shadow  //john字典暴力破解密码<br>john –show  1.txt<br>hashcat</p>
 
-      
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/21/%E9%9A%90%E5%86%99/" data-id="clmvmvopk00261s7k3xrwd3xk" class="article-share-link">Share</a>
-      
-      
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/21/%E5%B8%B8/" rel="next" title="常">
+                  <i class="fa fa-chevron-left"></i> 常
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/21/%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96/" rel="prev" title="文件读取">
+                  文件读取 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#tshark"><span class="nav-number">1.</span> <span class="nav-text">tshark</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#zsteg-png和bmp"><span class="nav-number">2.</span> <span class="nav-text">zsteg  png和bmp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Wavsteg"><span class="nav-number">3.</span> <span class="nav-text">Wavsteg</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#声波可视化器"><span class="nav-number">4.</span> <span class="nav-text">声波可视化器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#杂"><span class="nav-number">5.</span> <span class="nav-text">杂</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JPEG-jpg-，文件头：FFD8FFE0-00-10-4A-46-49-46"><span class="nav-number"></span> <span class="nav-text">JPEG (jpg)，文件头：FFD8FFE0 00 10 4A 46 49 46</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GIF-gif-，文件头：-3961"><span class="nav-number"></span> <span class="nav-text">GIF (gif)，文件头： 3961</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PNG-png-，文件头：89504E47"><span class="nav-number"></span> <span class="nav-text">PNG (png)，文件头：89504E47</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本编码："><span class="nav-number"></span> <span class="nav-text">文本编码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图像隐写："><span class="nav-number"></span> <span class="nav-text">图像隐写：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码隐写："><span class="nav-number"></span> <span class="nav-text">代码隐写：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BMP"><span class="nav-number"></span> <span class="nav-text">BMP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ZIP-Archive-zip"><span class="nav-number"></span> <span class="nav-text">ZIP Archive (zip)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-zip伪加密-binwalk-foremost直接可以把伪加密中的文件解压出来"><span class="nav-number"></span> <span class="nav-text">1.zip伪加密&#x2F;&#x2F;binwalk   foremost直接可以把伪加密中的文件解压出来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-暴力破解-Ziperello和ARCHPR都可以"><span class="nav-number"></span> <span class="nav-text">2.暴力破解 Ziperello和ARCHPR都可以</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-明文攻击"><span class="nav-number"></span> <span class="nav-text">3.明文攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-crc32碰撞"><span class="nav-number"></span> <span class="nav-text">4.crc32碰撞</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rar伪加密"><span class="nav-number"></span> <span class="nav-text">rar伪加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流量分析"><span class="nav-number"></span> <span class="nav-text">流量分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#蓝牙协议"><span class="nav-number"></span> <span class="nav-text">蓝牙协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wifi"><span class="nav-number"></span> <span class="nav-text">wifi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#键盘流量"><span class="nav-number"></span> <span class="nav-text">键盘流量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#鼠标流量"><span class="nav-number"></span> <span class="nav-text">鼠标流量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#raw"><span class="nav-number"></span> <span class="nav-text">raw</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#volatility"><span class="nav-number"></span> <span class="nav-text">volatility</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐写算法-常见有F5、Guess、JSteg和JPHide等-仅限于jpg图片"><span class="nav-number"></span> <span class="nav-text">隐写算法 常见有F5、Guess、JSteg和JPHide等  仅限于jpg图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#F5-刷新-jpg"><span class="nav-number"></span> <span class="nav-text">F5  刷新  jpg</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#outguess-master-猜"><span class="nav-number"></span> <span class="nav-text">outguess-master  猜</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jshswin工具（jphide工具的一种，还有stegdetect）"><span class="nav-number"></span> <span class="nav-text">Jshswin工具（jphide工具的一种，还有stegdetect）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片长宽比例诡异时"><span class="nav-number"></span> <span class="nav-text">图片长宽比例诡异时</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#杂-1"><span class="nav-number"></span> <span class="nav-text">杂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NTFS流"><span class="nav-number"></span> <span class="nav-text">NTFS流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件头"><span class="nav-number"></span> <span class="nav-text">文件头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#elf修复"><span class="nav-number"></span> <span class="nav-text">elf修复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unique"><span class="nav-number"></span> <span class="nav-text">unique</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#john"><span class="nav-number"></span> <span class="nav-text">john</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">zhiliya</p>
+  <div class="site-description" itemprop="description">emmmm 感觉没啥好说的</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhiliya</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
     </footer>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2019/11/21/%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          文件读取
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2019/11/21/%E5%B8%B8/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">常</div>
-    </a>
-  
-</nav>
 
   
-</article>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Misc/">Misc</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ctf/">ctf</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82/">杂</a></li></ul>
-    </div>
-  </div>
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
 
 
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Coppersmith/" rel="tag">Coppersmith</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GraphiQL/" rel="tag">GraphiQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/" rel="tag">php伪协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rsa/" rel="tag">rsa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sage/" rel="tag">sage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unctf/" rel="tag">unctf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wp/" rel="tag">wp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xxe/" rel="tag">xxe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E7%BB%9F%E4%B8%80%E5%9C%BA%E7%90%86%E8%AE%BA/" rel="tag">大统一场理论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">密码学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96/" rel="tag">文件读取</a></li></ul>
-    </div>
-  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Coppersmith/" style="font-size: 10px;">Coppersmith</a> <a href="/tags/GraphiQL/" style="font-size: 10px;">GraphiQL</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/" style="font-size: 10px;">php伪协议</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/sage/" style="font-size: 10px;">sage</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">sql注入</a> <a href="/tags/unctf/" style="font-size: 10px;">unctf</a> <a href="/tags/wp/" style="font-size: 10px;">wp</a> <a href="/tags/xxe/" style="font-size: 10px;">xxe</a> <a href="/tags/%E5%A4%A7%E7%BB%9F%E4%B8%80%E5%9C%BA%E7%90%86%E8%AE%BA/" style="font-size: 10px;">大统一场理论</a> <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" style="font-size: 20px;">密码学</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96/" style="font-size: 10px;">文件读取</a>
-    </div>
-  </div>
 
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li></ul>
-    </div>
-  </div>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2023/07/24/%E5%89%8D%E7%AB%AF/">前端</a>
-          </li>
-        
-          <li>
-            <a href="/2023/04/20/%E6%89%94%E5%87%BA%E5%8E%BB%E7%9A%84%E9%83%A8%E5%88%86/">扔出去的部分</a>
-          </li>
-        
-          <li>
-            <a href="/2023/04/20/%E4%B8%96%E7%95%8C%E8%A7%82/">世界观</a>
-          </li>
-        
-          <li>
-            <a href="/2022/10/01/%E6%9D%82/">杂</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/15/%E7%BD%91%E6%96%87/">网文</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2023 zhiliya<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-  </div>
 </body>
 </html>
